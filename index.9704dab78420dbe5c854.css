@@ -1,0 +1,794 @@
+.Note{
+    margin: 0 auto;
+    padding-left: calc(10px + 10.7vw);
+    display: grid;
+    grid-template-columns: 31.25vw 41.6vw;
+    grid-column-gap: 1vw;
+    grid-row-gap: 2.1vw;
+    justify-items: stretch;
+    align-items: stretch;
+    height: 100vh;
+}
+.Note_Main{
+    border-right:1px solid rgba(0, 0, 0, .11);
+    padding-top:calc(24vh - 10px);
+    display: flex;
+    flex-direction: column;
+    padding-right: 66px;
+}
+.Note_Main_Smile{
+    font-size: 58px;
+    position: relative;
+}
+.Note_Main_Smile_emoji{
+    cursor: pointer;
+}
+.Note_Main_Smile_EmojiPicker_Item{
+    cursor: pointer;
+}
+.Note_Main_Smile.Hidden .Note_Main_Smile_EmojiPicker{
+    display: none;
+}
+.Note_Main_Smile_EmojiPicker{
+    padding: 7px;
+    background-color: #fff;
+    position: absolute;
+    border:1px solid rgba(0, 0, 0, 0.322);
+    z-index: 99999;
+    font-size: 25px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    justify-items: stretch;
+    align-items: stretch;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) ;
+}
+
+.Note_Main_Title{
+    margin:0;
+    padding: 0;
+    font-size: 48px;
+    max-width: 100%;
+    min-width: 100%;
+    font-weight: 900;
+    margin-top:13px;
+    border:none;
+    word-break: break-word;
+}
+
+.Note_Main_Title:active{
+    border: none;
+}
+.Note_Main_Moto{
+    margin:0;
+    padding: 0;
+    font-size: 36px;
+    font-weight: 100;
+    font-style: italic;
+    width: 100%;
+    margin-top:61px;
+    display: flex;
+    word-break: break-word;
+    letter-spacing: 1.2px;
+    display: block;
+}
+.Note_Main_Moto:empty::before,
+.Note_Main_Moto:empty::after{
+    content:"";
+}
+.Note_Main_Moto:before{
+    content: '“';
+}
+.Note_Main_Moto:after{
+    content: '”';
+}
+.Note_Additional{
+    margin-top:24vh;
+    margin-left:3.4vw;
+}
+
+.Note_Additional_Date_Title{
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.Note_Additional_Date_Value{
+    color: rgba(0, 0, 0, 0.33);
+    font-weight: 700;
+    font-size: 12px;
+    margin-top:5px;
+}
+.Note_Additional_Date{
+    margin:0;
+    padding:0;
+    display: flex;
+    width: 23.9vw;
+    justify-content: space-between;
+    position: relative;
+}
+.Note_Additional_Description{
+    margin:0;
+    padding:0;
+    width: 100%;
+    font-size: 16px;
+    line-height: 170%;
+    margin-top:50px;
+    word-break: break-word;
+}
+
+.Note_Additional_Date_Item{
+    display: flex;
+    flex-direction: column;
+}
+.Note_Additional_Date_Item:nth-child(2){
+    margin-left:20px;
+}
+
+.Note_Additional_Other{
+    display: block;
+    font-size: 15px;
+    margin-top:50px;
+    word-break: break-word;
+    line-height: 170%;
+    padding-bottom: 133px;
+}
+
+
+.Note_Main_Moto,
+.Note_Main_Title,
+.Note_Main_Basic_List,
+.Note_Additional_Description,
+.Note_Additional_Other{
+    outline: none;
+    
+}
+.Note_Main_Moto:focus,
+.Note_Main_Title:focus,
+.Note_Main_Basic_List:focus,
+.Note_Additional_Description:focus,
+.Note_Additional_Other:focus{
+    outline: none;
+
+}
+
+.Note_Main_Title:empty:before,
+.Note_Main_Moto:empty:after,
+.Note_Main_Basic_List:empty:before,
+.Note_Additional_Other:empty:after,
+.Note_Additional_Description:empty:before{
+    content: attr(data-placeholder);
+    color: rgb(187, 187, 187);
+    cursor: text;
+}
+.Note_Main_Basic_List{
+    position: relative;
+    white-space: pre-wrap;
+}
+.Note_Main_Basic_List > ul{
+    margin:0;
+    padding: 0;
+}
+.Note_Remove:active,
+.Note_Remove:focus{
+    -webkit-tap-highlight-color: rgba(206, 206, 206, 0.288);
+}
+.Note_Remove_Icon{
+    right: 40px;
+    top:40px;
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1200px){
+    .Note{
+        padding-left: calc(13.7vw);
+    }
+    .Note_Main{
+        padding-right: 3.4375vw;
+    }
+}
+
+@media screen and (max-width: 660px){   
+    .Note{
+        margin: 0 auto;
+        margin-left: 75px;
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        padding-right: 33px;
+        margin-top:11.19324181626188vh;
+        margin-left:0px;
+        padding-left: 0px;
+        margin-left:70px;
+        margin-bottom: 20px;
+    }
+    .Note_Main{
+        border-right: 0px solid rgba(0, 0, 0, .11);
+        display: flex;
+        flex-direction: column;
+        padding-right: 0px;
+        margin:0px;
+        padding: 0px;
+        padding-right:50px;
+    }
+
+    .Note_Additional{
+        margin-top:0px
+    }
+    .Note_Additional_Date{
+        width: 100%;
+        display: none;
+    }
+    .Note_Main_Title{
+        font-size: 24px;
+    }
+    .Note_Main_Moto{
+        font-size: 18px;
+        margin-top:21px
+    }
+    .Note_Additional_Description{
+        margin-top:0px;
+        font-size: 15px;
+        margin-top:22px;
+    }
+
+
+    .Note_Additional_Other{
+        margin-top:25px;
+        padding-bottom: 20px;
+    }
+    .Note_Main_Basic_List:empty{
+        margin-left:0;
+        padding-left:0;
+    }
+    .Note_Main_Basic_List::after{
+        content:"";
+        width: 100%;
+        height: 2px;
+        margin-top:22px;
+        background-color: black;
+    }
+    .Note_Additional{
+        margin-left:0;  
+    }
+    .Notes_List_Wrap.Hidden{
+        width: 50px;
+    }
+    .Note_Remove_Icon{
+        right: 25px;
+        position: absolute;
+        top:25px;
+        width: 14px;
+        height: 15px;
+    }
+
+}
+.Notes_List{
+    margin:0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    width: 400px;
+    position: sticky;
+    transition: .2s;
+    max-height: 70vh;
+    overflow: auto;
+}
+.Notes_Toggler{
+    display: none;
+}
+.Notes_List_Wrap{
+    width: 400px;
+    top: 50%;
+    transform: translateY(-50%);
+    position: fixed;
+    transition: width .2s;
+    box-shadow: -1px 0px 0px 0px rgba(0, 0, 0, 0.1), 1px 0px 0px 0px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 99999999;
+    background: white;
+}
+.Notes_List_Wrap.Hidden{
+    width: 90px;
+    box-shadow: -1px 0px 0px 0px rgba(0, 0, 0, 0), 1px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+.Notes_List:hover{
+    overflow: auto;
+}
+.Notes_List_Item:first-child{
+    margin:0;
+}
+.Notes_List_Item:hover{
+    background-color: rgba(0, 0, 0, 0.05);
+}
+.Notews_List_Item_Link{
+    text-decoration: none;
+}
+
+.Notes_List_Item{
+    margin:0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Notes_List_Item-Active .Notes_List_Item_Link .Notes_List_Item_IMG{
+    transform: scale(1.5);
+    transition:0.2s
+}
+
+.Notes_List_Item_Link{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    text-decoration: none;
+    padding: 25px 44px;
+    width: 100%;
+}
+.Notes_List_Item_Delete{
+    padding: 5px 25px 5px 5px;
+    opacity: 0;
+    transition: 0.2s;
+}
+.Notes_List_Item:hover  .Notes_List_Item_Delete{
+    opacity: 1;
+    transition: 0.2s;
+}
+.Notes_List_Item_Title{
+    margin:0;
+    margin-left:46px;
+    font-size: 16px;
+    color:rgba(0, 0, 0, 0.404);
+    white-space: nowrap;
+}
+
+.Notes_List_Wrap.Hidden .Notes_List .Notes_List_Item{
+    background:none
+}
+.Notes_List_Item_Link_Title{
+    margin:0;
+    font-size: 16px;
+    margin-left:46px;
+    color:rgba(0, 0, 0, 0.404);
+}
+
+.Notes_List_Item_IMG_Delete{
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    text-align: center;
+    border:1px solid rgba(0, 0, 0, .22);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left:auto;
+}
+.Notes_List_Item_IMG_Delete_Icon{
+    width: 8px;
+    height: 2px;
+    background-color: rgba(0, 0, 0, .22);
+}
+.Notes_Create{
+    display: flex;
+    width: 400px;
+    display: block;
+}
+.Notes_List_Wrap.Hidden .Notes_Create:hover{
+    background:none
+}
+.Notes_Create:hover{
+    background-color: rgba(0, 0, 0, 0.05);
+}
+.Notes_Create_Link{
+    display: flex;
+    text-decoration: none;
+    padding: 25px 44px;
+}
+.Notes_Create_Link:focus,
+.Notes_Create_Link:active{
+    -webkit-tap-highlight-color: transparent;
+}
+.Notes_Create_Link_Icon{
+    width: 21px;
+    height: 21px;
+    display: block;
+    border: 1px solid rgba(0, 0, 0, 0.22);
+    border-radius: 50%;
+    color:rgba(0, 0, 0, 0.22);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Notes_Create_Link_Title{
+    margin:0;
+    font-size: 16px;
+    margin-left:46px;
+    color:rgba(0, 0, 0, 0.404);
+    display: block;
+}
+.Notes_List_Wrap{
+    overflow: hidden;
+}
+
+.Notes_List::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+.Notes_List::-webkit-scrollbar-track {
+    background-color: rgba(17, 23, 26, 0.08);
+    border-radius: 10px;
+}
+.Notes_List::-webkit-scrollbar-thumb {
+    background-color: rgba(17, 23, 26, 0.08);
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 660px){
+    .Notes_Create_Link{
+        display: flex;
+        text-decoration: none;
+        padding: 25px 44px 24px 25px;
+    }
+    .Notes_List_Item{
+        padding-left:24px;
+    }
+    .Notes_List_Item_Link{
+        padding: 25px 0px;
+
+    }
+    .Notes_Create{
+        margin:0;
+        display: flex;
+        width: 400px;
+        display: block;
+    }
+
+    .Notes_List_Wrap.Hidden{
+        width: 60px;
+    }
+
+
+    .Notes_Toggler{
+        width: 21px;
+        min-height: 18px;
+        margin-left:25px;
+        margin-top:25px;
+        position: relative;
+        cursor: pointer;
+        display: inline-block;
+      }
+      .Notes_Toggler span{
+        background-color:rgba(0, 0, 0, 0.33);
+        position: absolute;
+        transition: .4s cubic-bezier(.8, .5, .2, 1.4);
+        width:100%;
+        height: 2px;
+        transition-duration: 500ms
+      }
+      .Notes_Toggler span:nth-child(1){
+        top:0px;
+        left: 0px;
+      }
+      .Notes_Toggler span:nth-child(2){
+        top:8px;
+        left: 0px;
+        opacity:1;
+      }
+      .Notes_Toggler span:nth-child(3){
+        bottom:0px;
+        left: 0px;
+      }
+      .Notes_List_Wrap:not(.Hidden) .Notes_Toggler span:nth-child(1){
+        transform: rotate(45deg);
+        top: 8px;
+      }
+      .Notes_List_Wrap:not(.Hidden) .Notes_Toggler span:nth-child(2){
+        opacity:0;
+        transform: translateX(-100%);
+      }
+      .Notes_List_Wrap:not(.Hidden) .Notes_Toggler span:nth-child(3){
+        transform: rotate(-45deg);
+        top: 8px;
+      }
+
+    .Notes_Create{
+        display: block;
+    }
+    .Notes_List_Item_Create{
+        display: none;
+    }
+    .Notes_List{
+        width: 100%;
+        max-height: 80%;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        margin-top:18px;
+
+    }
+    .Notes_List_Wrap{
+        box-shadow: -1px 0px 0px 0px rgba(0, 0, 0, 0), 1px 0px 0px 0px rgba(0, 0, 0, 0);
+        width: 100%;
+        justify-content: space-between;
+    }
+    .Notes_List_Wrap.Hidden .Notes_List{
+        overflow-x: auto;
+        overflow-x: hidden;
+    }
+    .Notes_List::-webkit-scrollbar {
+        display: none;
+    }
+    .Notes_List_Item_Delete{
+        padding: 5px 25px 5px 5px;
+        opacity: 1;
+        transition: 0s;
+    }
+
+    .Notes_List_Item_Link:hover ~ .Notes_List_Item_Delete{
+        opacity: 1;
+        transition: 0s;
+    }
+}
+
+/* FINISH *//* FINISH *//* FINISH *//* FINISH *//* FINISH *//* FINISH */
+
+.Note_Additional_Todo{
+    margin-top:50px;
+    display: block;
+}
+
+.Note_Additional_Todo_Wrapper.Open .Note_Additional_Todo_Wrapper_Actions .Note_Additional_Todo_Wrapper_Actions_Expand .Note_Additional_Todo_Wrapper_Actions_Expand_Icon {
+    transition: .4s;
+    transform: rotate(0deg);
+}
+
+
+
+.Note_Additional_Todo_Wrapper_Main{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 5px 10px 5px 5px;
+}
+.Note_Additional_Todo_Wrapper_Main:focus,
+.Note_Additional_Todo_Wrapper_Main:active{
+    -webkit-tap-highlight-color: transparent;
+}
+
+.Note_Additional_Todo_Wrapper_Actions{
+    display: flex;
+    align-items: center;
+}
+.Note_Additional_Todo_Wrapper_Actions_Trash{
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .4s;
+}
+
+.Note_Additional_Todo_Wrapper_Actions_Trash_Icon{
+    width: 14px;
+    height: 15px;
+    opacity: 0.5;   
+}
+
+.Note_Additional_Todo_Wrapper_Actions_Expand{
+    margin-left:5px;
+    transition: .4s;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.Note_Additional_Todo_Wrapper_Actions_Trash:hover{
+    background-color: #e9e9e9;
+}
+
+.Note_Additional_Todo_Wrapper_Actions_Expand:active{
+    background-color:#e9e9e9;
+}
+.Note_Additional_Todo_Wrapper_Actions_Expand_Icon{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 4px 6px 4px;
+    border-color: transparent transparent #000000 transparent;
+    transform: rotate(180deg);
+    opacity: 0.2;   
+    transition: .4s;    
+}
+
+.Note_Additional_Todo_Wrapper_Main_Title{
+    outline: none;
+}
+.Note_Additional_Todo_Wrapper_Main_Title:focus{
+        outline: none;
+}
+
+.Note_Additional_Todo_Wrapper_Main_Title:empty:before{
+    content: attr(data-placeholder);
+    color: rgb(187, 187, 187);
+    cursor: text;
+}
+
+
+
+.Note_Additional_Todo_Wrapper_Main_Title{
+    font-size: 18px;
+    font-weight: 900;
+    max-width: 70%;
+    margin-right: 10px;
+    cursor: text;
+    margin:0;
+    padding: 0;
+}
+.Note_Additional_Todo_Wrapper_Actions_Remove{
+    width: 30px;
+    height: 30px;
+    margin-left:auto;
+    position: relative;
+    cursor:pointer;
+    margin-right: 10px;
+}
+.Note_Additional_Todo_Wrapper_Actions_Remove_Icon{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    display: block;
+    transform: scale(0.8);
+    opacity: 0.2;
+}
+.Note_Additional_Todo_Wrapper_Actions_Remove_Icon::before,
+.Note_Additional_Todo_Wrapper_Actions_Remove_Icon::after{
+    top:47%;
+    transform: translateY(-50%);
+    left:7px;
+}
+
+.Note_Additional_Todo_Wrapper_Actions_Remove_Icon::before{
+    content:"";
+    position: absolute;
+    width: 50%;
+    height: 2px;
+    display: block;
+    background-color: black;
+    transform: rotate(45deg);
+}
+.Note_Additional_Todo_Wrapper_Actions_Remove_Icon::after{
+    content:"";
+    position: absolute;
+    width: 50%;
+    height: 2px;
+    display: block;
+    background-color: black;
+    transform: rotate(-45deg);
+}
+.Note_Additional_Todo_Wrapper_Main{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.Note_Additional_Todo_Action{
+    display: flex;
+    align-items: center;
+    margin-top:11px;
+    color:#C4C4C4;
+}
+.Note_Additional_Todo_Action_Add{
+    display: block;
+    margin-left:auto;
+    width: 165px;
+    height: 35px;
+    background: none;
+    border:1px solid #C4C4C4;
+    cursor: pointer;
+    font-size: 16px;
+    color:#C4C4C4;
+}
+
+
+
+
+@media screen and (max-width: 660px){   
+    .Note_Additional_Todo_Wrapper_Main_Title{
+        margin:0;
+        padding: 4px 0px;
+        font-size: 16px;
+        margin-bottom: 0px;
+    }
+    .Note_Additional_Todo_WrapperList{
+        font-size: 16px;
+        margin-top:0;
+    }
+    .Note_Additional_Todo{
+        margin-top:33px
+    }
+}
+
+
+
+.Note_Additional_Todo_WrapperList{
+    margin-top:33px;
+    display:block
+}
+.Note_Additional_Todo_WrapperList{
+    list-style: none;
+    margin:0;
+    padding:0;
+    font-size: 18px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+    max-height: 0px;
+    overflow: hidden;
+}
+
+.Note_Additional_Todo_WrapperList_Item{
+    display: flex;
+    padding: 2px 0px;
+    position: relative;
+    align-items: flex-start ;
+    justify-content: flex-start;
+}
+.Note_Additional_Todo_WrapperList_Item:last-child{
+    margin-bottom:5px
+}
+.Note_Additional_Todo_WrapperList_Value{
+    display: block;
+    width: 75%;
+    margin-left:5px;
+    font-size: 16px;
+}
+.Note_Additional_Todo_WrapperList_Checkbox:checked ~ .Note_Additional_Todo_WrapperList_Value{
+    position: relative;
+    text-decoration: line-through;
+    opacity: 0.4;
+}
+
+.Note_Additional_Todo_Wrapper.Open .Note_Additional_Todo_WrapperList{
+    max-height: 660px;
+}
+
+.Note_Additional_Todo_WrapperList_Value{
+    outline: none;
+}
+.Note_Additional_Todo_WrapperList_Value:focus{
+    outline: none;
+}
+
+.Note_Additional_Todo_WrapperList_Value:empty::before{
+    content: attr(data-placeholder);
+    color: rgb(187, 187, 187);
+    cursor: text;
+}
+
+@media screen and (max-width: 660px){   
+    .Note_Additional_Todo_WrapperList{
+        font-size: 16px;
+        margin-top:0;
+    }
+}
+
+
+body {
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+}
+
+
+
