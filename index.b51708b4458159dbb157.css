@@ -326,6 +326,9 @@
     transform: scale(1.5);
     transition:0.2s
 }
+.Notes_List_Item-Active{
+    background-color: rgba(0, 0, 0, 0.05);
+}
 
 .Notes_List_Item_Link{
     display: flex;
