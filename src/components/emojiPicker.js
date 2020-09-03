@@ -41,6 +41,7 @@ export default class EmojiPicker extends HTMLElement {
             index: noteIndex,
             data: { edited: new Date(), emoji: e.target.innerHTML },
           });
+          store.events.publish("updateNote");
         })
       );
   }
