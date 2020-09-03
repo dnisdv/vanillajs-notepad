@@ -34,6 +34,9 @@ export default class Note extends HTMLElement {
       if (e.target.innerHTML === "<br>") {
         e.target.innerHTML = "";
       }
+      if (e.target.className === "Note_Main_Title") {
+        store.events.publish("updateNote");
+      }
     };
 
     nodes.forEach((node) => {
@@ -80,7 +83,6 @@ export default class Note extends HTMLElement {
         });
     }
   }
-
 
   returnDateWithZeroes(date) {
     const MyDate = new Date(date);
@@ -143,8 +145,8 @@ export default class Note extends HTMLElement {
 
     this.events();
   }
-  disconnectedCallback() {}
 
+  disconnectedCallback() {}
 }
 
 window.customElements.define("note-pad", Note);

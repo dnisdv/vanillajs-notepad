@@ -23,6 +23,7 @@ export default class Store {
       set(state, key, value) {
         state[key] = value;
         self.events.publish("stateChange", self.state);
+
         localStorage.setItem("Notes", JSON.stringify(self.state));
         if (self.status !== "mutation") {
           throw new Error(`You should use a mutation to set ${key}`);

@@ -63,7 +63,11 @@ class App extends HTMLElement {
             edited: new Date(),
           });
 
-          window.history.pushState(
+          this.innerHTML = `<note-pad note-id=${noteId}></note-pad>`;
+          store.events.publish("updateNote");
+          store.events.publish("hashChange", noteId);
+
+          return window.history.pushState(
             null,
             null,
             `#note/${
@@ -72,8 +76,6 @@ class App extends HTMLElement {
                 : 1
             }`
           );
-          this.innerHTML = `<note-pad note-id=${noteId}></note-pad>`;
-          return store.events.publish("hashChange", noteId);
         }
         this.innerHTML = `<note-pad note-id=${id}></note-pad>`;
         return store.events.publish("hashChange", id);

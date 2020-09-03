@@ -10,9 +10,18 @@ class Notes extends HTMLElement {
     this.noteId =
       this.getAttribute("app-id") || window.location.hash.split("/")[1];
 
-    store.events.subscribe("stateChange", () => this.connectedCallback());
-
+    store.events.subscribe("updateNote", () => {
+      sessionStorage.setItem(
+        "scrollpos",
+        document.querySelector(".Notes_List").scrollTop
+      );
+      this.connectedCallback();
+    });
     store.events.subscribe("hashChange", (noteId) => {
+      const scrollpos = sessionStorage.getItem("scrollpos");
+      if (scrollpos) {
+        document.querySelector(".Notes_List").scrollTo(0, +scrollpos);
+      }
       this.noteId = noteId;
       document
         .querySelectorAll(".Notes_List_Item")
@@ -111,6 +120,10 @@ class Notes extends HTMLElement {
 
     document.querySelectorAll(".Notes_List_Item_Link").forEach((i) => {
       i.addEventListener("click", () => {
+        sessionStorage.setItem(
+          "scrollpos",
+          document.querySelector(".Notes_List").scrollTop
+        );
         this.classList.add("Hidden");
       });
     });
