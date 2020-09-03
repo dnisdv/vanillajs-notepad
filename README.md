@@ -1,4 +1,5 @@
-﻿# Notepad on vanilla js
+<a href="https://dnisdv.github.io/vanillajs-notepad/">Online demo</a>
+# Notepad on vanilla js
  
 <img src="https://i.imgur.com/hJGJqjT.png" />
 
