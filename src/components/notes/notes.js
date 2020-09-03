@@ -10,13 +10,18 @@ class Notes extends HTMLElement {
     this.noteId =
       this.getAttribute("app-id") || window.location.hash.split("/")[1];
 
-    store.events.subscribe("updateNote", () => {
-      sessionStorage.setItem(
-        "scrollpos",
-        document.querySelector(".Notes_List").scrollTop
-      );
+    store.events.subscribe("updateNote", (status) => {
+      if (status === "render") {
+        this.scrollPositionHandler();
+      } else {
+        sessionStorage.setItem(
+          "scrollpos",
+          document.querySelector(".Notes_List").scrollTop
+        );
+      }
       this.connectedCallback();
     });
+
     store.events.subscribe("hashChange", (noteId) => {
       const scrollpos = sessionStorage.getItem("scrollpos");
       if (scrollpos) {
@@ -90,7 +95,6 @@ class Notes extends HTMLElement {
         store.dispatch("removeNote", {
           noteId: +e.currentTarget.parentNode.dataset.id,
         });
-
         if (+e.currentTarget.parentNode.dataset.id === +this.noteId) {
           if (e.currentTarget.parentNode.previousElementSibling) {
             window.history.pushState(
@@ -106,6 +110,8 @@ class Notes extends HTMLElement {
             );
           }
         }
+        store.events.publish("removeTodo");
+        store.events.publish("updateNote");
       });
     });
 

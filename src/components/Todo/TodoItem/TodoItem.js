@@ -10,16 +10,22 @@ export default class TodoItem extends HTMLElement {
     super();
     this.noteId = this.getAttribute("note-id");
     this.todoId = +this.getAttribute("todo-id");
-    this.todoIndex = store.state.notes[this.noteId].todoes.findIndex(
+    this.noteIndex = store.state.notes.findIndex((i) => +i.id === +this.noteId);
+    this.todoIndex = store.state.notes[this.noteIndex].todoes.findIndex(
       (i) => i.id === this.todoId
     );
+    store.events.subscribe("removeTodo", () => {
+      this.noteIndex = store.state.notes.findIndex(
+        (i) => +i.id === +this.noteId
+      );
+    });
   }
 
   todoChangeHandler(e) {
     this.WrapperList = e.target.parentNode.parentNode;
     const Wrapper = e.target.parentNode.parentNode.parentNode;
     if (e.target.tagName === "INPUT" && e.target.type === "checkbox") {
-      store.state.notes[this.noteId].todoes[this.todoIndex].data.forEach(
+      store.state.notes[this.noteIndex].todoes[this.todoIndex].data.forEach(
         (k, index) => {
           if (k.id === +e.target.parentNode.dataset.id) {
             store.dispatch("todoChanger", {
@@ -63,7 +69,7 @@ export default class TodoItem extends HTMLElement {
       if (e.keyCode === 13) {
         e.preventDefault();
         const maxId = Math.max(
-          ...store.state.notes[this.noteId].todoes[this.todoIndex].data.map(
+          ...store.state.notes[this.noteIndex].todoes[this.todoIndex].data.map(
             (i) => i.id
           )
         );
@@ -75,7 +81,7 @@ export default class TodoItem extends HTMLElement {
           );
         };
         store.dispatch("addTodoItemToNote", {
-          index: this.noteId,
+          noteId: this.noteId,
           todoId: this.todoId,
           todoItemId: +e.target.parentNode.dataset.id,
         });
@@ -111,10 +117,10 @@ export default class TodoItem extends HTMLElement {
           )
         );
       }
-      const todoIndex = store.state.notes[this.noteId].todoes.findIndex(
+      const todoIndex = store.state.notes[this.noteIndex].todoes.findIndex(
         (i) => +i.id === +this.todoId
       );
-      store.state.notes[this.noteId].todoes[todoIndex].data.forEach(
+      store.state.notes[this.noteIndex].todoes[todoIndex].data.forEach(
         (i, index) => {
           if (i.id === +e.target.parentNode.dataset.id) {
             store.dispatch("todoChanger", {
@@ -140,11 +146,11 @@ export default class TodoItem extends HTMLElement {
       ) {
         e.preventDefault();
         e.stopPropagation();
-        if (!store.state.notes[this.noteId].todoes[this.todoIndex]) {
+        if (!store.state.notes[this.noteIndex].todoes[this.todoIndex]) {
           return false;
         }
         if (
-          store.state.notes[this.noteId].todoes[this.todoIndex].data.length -
+          store.state.notes[this.noteIndex].todoes[this.todoIndex].data.length -
             1 ===
           0
         ) {
@@ -178,11 +184,11 @@ export default class TodoItem extends HTMLElement {
   }
 
   render() {
-    const todoIndex = store.state.notes[this.noteId].todoes.findIndex(
+    const todoIndex = store.state.notes[this.noteIndex].todoes.findIndex(
       (i) => +i.id === +this.todoId
     );
-    const template = store.state.notes[this.noteId].todoes[todoIndex]
-      ? store.state.notes[this.noteId].todoes[todoIndex].data
+    const template = store.state.notes[this.noteIndex].todoes[todoIndex]
+      ? store.state.notes[this.noteIndex].todoes[todoIndex].data
           .map(
             (k) =>
               `<li data-id=${
@@ -210,6 +216,10 @@ export default class TodoItem extends HTMLElement {
   }
 
   connectedCallback() {
+    this.noteIndex = store.state.notes.findIndex((i) => +i.id === +this.noteId);
+    this.todoIndex = store.state.notes[this.noteIndex].todoes.findIndex(
+      (i) => i.id === this.todoId
+    );
     this.render();
     this.events(this.todoId);
   }

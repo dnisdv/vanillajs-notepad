@@ -24,7 +24,13 @@ export default class EmojiPicker extends HTMLElement {
     "\ud83d\ude19",
   ];
 
-  events(noteIndex) {
+  constructor() {
+    super();
+    this.noteId = this.getAttribute("note-id");
+    this.noteIndex = store.state.notes.findIndex((i) => +i.id === +this.noteId);
+  }
+
+  events() {
     document
       .querySelector(".Note_Main_Smile_emoji")
       .addEventListener("click", () =>
@@ -38,7 +44,7 @@ export default class EmojiPicker extends HTMLElement {
             e.target.innerHTML;
           document.querySelector(".Note_Main_Smile").classList.add("Hidden");
           store.dispatch("updateNote", {
-            index: noteIndex,
+            index: this.noteIndex,
             data: { edited: new Date(), emoji: e.target.innerHTML },
           });
           store.events.publish("updateNote");
@@ -47,7 +53,6 @@ export default class EmojiPicker extends HTMLElement {
   }
 
   connectedCallback() {
-    const noteIndex = this.getAttribute("note-id");
     this.innerHTML = `
       <div class='Note_Main_Smile Hidden'><span class='Note_Main_Smile_emoji'>😀</span>
           <div class="Note_Main_Smile_EmojiPicker"></div>
@@ -60,9 +65,9 @@ export default class EmojiPicker extends HTMLElement {
       .join("");
 
     document.querySelector(".Note_Main_Smile_emoji").innerHTML =
-      store.state.notes[noteIndex].emoji;
+      store.state.notes[this.noteIndex].emoji;
 
-    this.events(noteIndex);
+    this.events(this.noteIndex);
   }
 }
 

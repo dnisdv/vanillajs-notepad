@@ -10,19 +10,23 @@ export default class Todo extends HTMLElement {
   constructor() {
     super();
     this.noteId = this.getAttribute("note-id");
+    this.noteIndex = store.state.notes.findIndex((i) => +i.id === +this.noteId);
+
     store.events.subscribe("removeTodo", () => {
-      this.connectedCallback();
+      this.noteIndex = store.state.notes.findIndex(
+        (i) => +i.id === +this.noteId
+      );
     });
   }
 
   eventHandler() {
     const titleChangeHandler = (e) => {
       if (e.keyCode === 13) return e.preventDefault();
-      const todoIndex = store.state.notes[this.noteId].todoes.findIndex(
+      const todoIndex = store.state.notes[this.noteIndex].todoes.findIndex(
         (i) => +i.id === +e.target.parentNode.parentNode.dataset.id
       );
       return store.dispatch("todoTitleChanger", {
-        index: this.noteId,
+        noteId: this.noteId,
         todoid: todoIndex,
         key: "title",
         data: e.target.innerHTML,
@@ -74,8 +78,8 @@ export default class Todo extends HTMLElement {
   render() {
     const TodoTemplate = () => {
       return `${
-        store.state.notes[this.noteId]
-          ? store.state.notes[this.noteId].todoes
+        store.state.notes[this.noteIndex]
+          ? store.state.notes[this.noteIndex].todoes
               .map((i) => {
                 return `<div data-id=${
                   i.id
@@ -109,7 +113,7 @@ export default class Todo extends HTMLElement {
       }
         <div class='Note_Additional_Todo_Action'>
         ${
-          store.state.notes[this.noteId].todoes.length === 0
+          store.state.notes[this.noteIndex].todoes.length === 0
             ? "<span>add list</span>"
             : ""
         }
@@ -130,7 +134,7 @@ export default class Todo extends HTMLElement {
         store.dispatch("addTodoToNote", { noteId: this.noteId });
         this.connectedCallback();
       });
-    this.eventHandler(this.noteId);
+    this.eventHandler();
   }
 
   disconnectedCallback() {}

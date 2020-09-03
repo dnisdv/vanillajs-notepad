@@ -21,7 +21,7 @@ export default class Note extends HTMLElement {
 
     const changeHandler = (e) => {
       store.dispatch("updateNote", {
-        index: this.noteIndex,
+        noteId: this.noteId,
         data: {
           edited: new Date(),
           [e.target.getAttribute("key")]: e.target.innerHTML,
@@ -55,27 +55,30 @@ export default class Note extends HTMLElement {
         .addEventListener("click", (e) => {
           e.preventDefault();
           if (store.state.notes.length !== 1) {
-            store.dispatch("removeNote", { noteId: +this.noteId });
+            const NOTEINDEX = store.state.notes.findIndex(
+              (i) => +i.id === +this.noteId
+            );
 
-            if (store.state.notes[this.noteIndex - 1]) {
+            store.dispatch("removeNote", { noteId: +this.noteId });
+            if (store.state.notes[NOTEINDEX - 1]) {
               return window.history.pushState(
                 null,
                 null,
-                `#note/${store.state.notes[this.noteIndex - 1].id}`
+                `#note/${store.state.notes[NOTEINDEX - 1].id}`
               );
             }
-            if (store.state.notes[this.noteIndex + 1]) {
+            if (store.state.notes[NOTEINDEX + 1]) {
               return window.history.pushState(
                 null,
                 null,
-                `#note/${store.state.notes[this.noteIndex].id}`
+                `#note/${store.state.notes[NOTEINDEX].id}`
               );
             }
-            if (store.state.notes[this.noteIndex]) {
+            if (store.state.notes[NOTEINDEX]) {
               return window.history.pushState(
                 null,
                 null,
-                `#note/${store.state.notes[this.noteIndex].id}`
+                `#note/${store.state.notes[NOTEINDEX].id}`
               );
             }
           }
@@ -103,7 +106,7 @@ export default class Note extends HTMLElement {
             }
             <div class="Note">
               <div class="Note_Main">
-                  <emoji-picker note-id=${this.noteIndex}></emoji-picker>
+                  <emoji-picker note-id=${this.noteId}></emoji-picker>
 
                   <h1 key='title' contenteditable spellcheck="false" data-placeholder="Untitled" class="Note_Main_Title"></h1>
                   <div key='moto' contenteditable spellcheck="false" data-placeholder='“Your Motto”' class="Note_Main_Moto"></div>
@@ -123,7 +126,7 @@ export default class Note extends HTMLElement {
 
                   <div key='additional_information' spellcheck="false" contenteditable data-placeholder="Additional Information" data-placeholder="Write Information" class="Note_Additional_Description"></div>
                   <note-todo note-id=${
-                    this.noteIndex
+                    this.noteId
                   } class='Note_Additional_Todo'></note-todo>
                   
                   <div key='additional_other_information' spellcheck="false" contenteditable data-placeholder="Other Information" class='Note_Additional_Other'></div>

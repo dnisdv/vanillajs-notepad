@@ -64,7 +64,7 @@ class App extends HTMLElement {
           });
 
           this.innerHTML = `<note-pad note-id=${noteId}></note-pad>`;
-          store.events.publish("updateNote");
+          store.events.publish("updateNote", "render");
           store.events.publish("hashChange", noteId);
 
           return window.history.pushState(
@@ -78,6 +78,7 @@ class App extends HTMLElement {
           );
         }
         this.innerHTML = `<note-pad note-id=${id}></note-pad>`;
+        store.events.publish("updateNote");
         return store.events.publish("hashChange", id);
       })
       .add("", () => {
