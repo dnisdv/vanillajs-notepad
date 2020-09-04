@@ -50,7 +50,7 @@ export default class TodoItem extends HTMLElement {
             noteId: this.noteId,
             todoId: this.todoId,
           });
-          return Wrapper.remove();
+          return store.events.publish("updateTodo", this.noteId);
         }
 
         if (e.target.parentNode.previousElementSibling) {
