@@ -12,16 +12,15 @@ export default class Todo extends HTMLElement {
     this.noteId = this.getAttribute("note-id");
     this.noteIndex = store.state.notes.findIndex((i) => +i.id === +this.noteId);
 
-    store.events.subscribe("removeTodo", () => {
-      this.noteIndex = store.state.notes.findIndex(
-        (i) => +i.id === +this.noteId
-      );
-    });
+    // store.events.subscribe("stateChange", () => {
+    //   this.connectedCallback();
+    // });
   }
 
   eventHandler() {
     const titleChangeHandler = (e) => {
       if (e.keyCode === 13) return e.preventDefault();
+
       const todoIndex = store.state.notes[this.noteIndex].todoes.findIndex(
         (i) => +i.id === +e.target.parentNode.parentNode.dataset.id
       );
@@ -51,7 +50,8 @@ export default class Todo extends HTMLElement {
             noteId: this.noteId,
             todoId: e.target.dataset.id,
           });
-          this.connectedCallback();
+          return this.connectedCallback();
+          // return this.render();
         });
       });
 
@@ -71,11 +71,14 @@ export default class Todo extends HTMLElement {
             },
           });
           return this.connectedCallback();
+          // return this.render();
         });
       });
   }
 
   render() {
+    this.noteIndex = store.state.notes.findIndex((i) => +i.id === +this.noteId);
+
     const TodoTemplate = () => {
       return `${
         store.state.notes[this.noteIndex]
@@ -126,6 +129,13 @@ export default class Todo extends HTMLElement {
   }
 
   connectedCallback() {
+    store.events.subscribe("updateTodo", (noteId) => {
+      if (+noteId === +this.noteId) {
+        this.connectedCallback();
+      }
+    });
+
+    this.noteIndex = store.state.notes.findIndex((i) => +i.id === +this.noteId);
     this.render();
 
     document
@@ -133,6 +143,7 @@ export default class Todo extends HTMLElement {
       .addEventListener("click", () => {
         store.dispatch("addTodoToNote", { noteId: this.noteId });
         this.connectedCallback();
+        // this.render();
       });
     this.eventHandler();
   }

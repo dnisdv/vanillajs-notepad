@@ -12,9 +12,9 @@ export default class TodoItem extends HTMLElement {
     this.todoId = +this.getAttribute("todo-id");
     this.noteIndex = store.state.notes.findIndex((i) => +i.id === +this.noteId);
     this.todoIndex = store.state.notes[this.noteIndex].todoes.findIndex(
-      (i) => i.id === this.todoId
+      (i) => +i.id === +this.todoId
     );
-    store.events.subscribe("removeTodo", () => {
+    store.events.subscribe("stateChange", () => {
       this.noteIndex = store.state.notes.findIndex(
         (i) => +i.id === +this.noteId
       );
@@ -22,6 +22,9 @@ export default class TodoItem extends HTMLElement {
   }
 
   todoChangeHandler(e) {
+    this.todoIndex = store.state.notes[this.noteIndex].todoes.findIndex(
+      (i) => +i.id === +this.todoId
+    );
     this.WrapperList = e.target.parentNode.parentNode;
     const Wrapper = e.target.parentNode.parentNode.parentNode;
     if (e.target.tagName === "INPUT" && e.target.type === "checkbox") {
@@ -139,6 +142,9 @@ export default class TodoItem extends HTMLElement {
   }
 
   events() {
+    this.todoIndex = store.state.notes[this.noteIndex].todoes.findIndex(
+      (i) => +i.id === +this.todoId
+    );
     this.addEventListener("click", (e) => {
       if (
         e.target.classList.value ===
@@ -158,13 +164,15 @@ export default class TodoItem extends HTMLElement {
             noteId: this.noteId,
             todoId: this.todoId,
           });
-          return store.events.publish("removeTodo");
+          return store.events.publish("updateTodo", this.noteId);
         }
+
         store.dispatch("removeTodoItem", {
-          noteId: this.noteId,
-          todoId: this.todoId,
+          noteId: +this.noteId,
+          todoId: +this.todoId,
           todoItemId: +e.target.parentNode.parentNode.dataset.id,
         });
+
         this.render();
         return undefined;
       }
@@ -184,11 +192,12 @@ export default class TodoItem extends HTMLElement {
   }
 
   render() {
-    const todoIndex = store.state.notes[this.noteIndex].todoes.findIndex(
+    this.todoIndex = store.state.notes[this.noteIndex].todoes.findIndex(
       (i) => +i.id === +this.todoId
     );
-    const template = store.state.notes[this.noteIndex].todoes[todoIndex]
-      ? store.state.notes[this.noteIndex].todoes[todoIndex].data
+
+    const template = store.state.notes[this.noteIndex].todoes[this.todoIndex]
+      ? store.state.notes[this.noteIndex].todoes[this.todoIndex].data
           .map(
             (k) =>
               `<li data-id=${
@@ -216,10 +225,6 @@ export default class TodoItem extends HTMLElement {
   }
 
   connectedCallback() {
-    this.noteIndex = store.state.notes.findIndex((i) => +i.id === +this.noteId);
-    this.todoIndex = store.state.notes[this.noteIndex].todoes.findIndex(
-      (i) => i.id === this.todoId
-    );
     this.render();
     this.events(this.todoId);
   }

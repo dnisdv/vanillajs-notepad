@@ -43,11 +43,16 @@ export default class EmojiPicker extends HTMLElement {
           document.querySelector(".Note_Main_Smile_emoji").innerHTML =
             e.target.innerHTML;
           document.querySelector(".Note_Main_Smile").classList.add("Hidden");
+
           store.dispatch("updateNote", {
-            index: this.noteIndex,
-            data: { edited: new Date(), emoji: e.target.innerHTML },
+            noteId: this.noteId,
+            data: {
+              edited: new Date(),
+              emoji: e.target.innerHTML,
+            },
           });
-          store.events.publish("updateNote");
+
+          return store.events.publish("updateNote", "render");
         })
       );
   }
@@ -67,7 +72,7 @@ export default class EmojiPicker extends HTMLElement {
     document.querySelector(".Note_Main_Smile_emoji").innerHTML =
       store.state.notes[this.noteIndex].emoji;
 
-    this.events(this.noteIndex);
+    this.events();
   }
 }
 

@@ -125,6 +125,7 @@ export default class Note extends HTMLElement {
                   </ul>
 
                   <div key='additional_information' spellcheck="false" contenteditable data-placeholder="Additional Information" data-placeholder="Write Information" class="Note_Additional_Description"></div>
+                 
                   <note-todo note-id=${
                     this.noteId
                   } class='Note_Additional_Todo'></note-todo>

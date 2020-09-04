@@ -110,7 +110,6 @@ class Notes extends HTMLElement {
             );
           }
         }
-        store.events.publish("removeTodo");
         store.events.publish("updateNote");
       });
     });
