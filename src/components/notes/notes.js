@@ -19,7 +19,7 @@ class Notes extends HTMLElement {
           document.querySelector(".Notes_List").scrollTop
         );
       }
-      this.connectedCallback();
+        this.connectedCallback();
     });
 
     store.events.subscribe("hashChange", (noteId) => {
@@ -129,7 +129,9 @@ class Notes extends HTMLElement {
           "scrollpos",
           document.querySelector(".Notes_List").scrollTop
         );
-        this.classList.add("Hidden");
+        setTimeout(() => {
+          this.classList.add("Hidden");
+        },40)
       });
     });
 
@@ -196,6 +198,7 @@ class Notes extends HTMLElement {
   }
 
   connectedCallback() {
+    this.classList.add("Hidden")
     this.render();
     this.events();
   }
