@@ -19,54 +19,6 @@ class App extends HTMLElement {
         const alreadyNote = store.state.notes.map((i) => +i.id === +id);
 
         if (!alreadyNote.includes(true)) {
-          const lastNote = store.state.notes[store.state.notes.length - 1];
-          const noteId = lastNote ? lastNote.id + 1 : 1;
-
-          store.dispatch("addNote", {
-            emoji: "\ud83d\ude00",
-            id: noteId,
-            title: "",
-            moto: "",
-            basic_information: "",
-            additional_information: "",
-            todoes: [
-              {
-                isOpen: true,
-                id: 1,
-                title: "",
-                data: [
-                  {
-                    id: 1,
-                    title: "",
-                    checked: false,
-                  },
-                  {
-                    id: 2,
-                    title: "",
-                    checked: false,
-                  },
-                  {
-                    id: 3,
-                    title: "",
-                    checked: false,
-                  },
-                  {
-                    id: 4,
-                    title: "",
-                    checked: false,
-                  },
-                ],
-              },
-            ],
-            additional_other_information: "",
-            created_date: new Date(),
-            edited: new Date(),
-          });
-
-          this.innerHTML = `<note-pad note-id=${noteId}></note-pad>`;
-          store.events.publish("updateNote", "render");
-          store.events.publish("hashChange", noteId);
-
           return window.history.pushState(
             null,
             null,

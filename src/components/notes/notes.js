@@ -137,10 +137,69 @@ class Notes extends HTMLElement {
 
     document
       .querySelector(".Notes_Create_Link")
-      .addEventListener("click", () => {
+      .addEventListener("click", (e) => {
+        e.preventDefault()
+
+          const lastNote = store.state.notes[store.state.notes.length - 1];
+          const noteId = lastNote ? lastNote.id + 1 : 1;
+
+          store.dispatch("addNote", {
+            emoji: "\ud83d\ude00",
+            id: noteId,
+            title: "",
+            moto: "",
+            basic_information: "",
+            additional_information: "",
+            todoes: [
+              {
+                isOpen: true,
+                id: 1,
+                title: "",
+                data: [
+                  {
+                    id: 1,
+                    title: "",
+                    checked: false,
+                  },
+                  {
+                    id: 2,
+                    title: "",
+                    checked: false,
+                  },
+                  {
+                    id: 3,
+                    title: "",
+                    checked: false,
+                  },
+                  {
+                    id: 4,
+                    title: "",
+                    checked: false,
+                  },
+                ],
+              },
+            ],
+            additional_other_information: "",
+            created_date: new Date(),
+            edited: new Date(),
+          });
+
+          store.events.publish("updateNote", "render");
+          store.events.publish("hashChange", noteId);
+
         sessionStorage.setItem(
           "scrollpos",
           document.querySelector(".Notes_List").scrollHeight
+        );
+        
+        return window.history.pushState(
+          null,
+          null,
+          `#note/${
+            store.state.notes[store.state.notes.length - 1]
+              ? store.state.notes[store.state.notes.length - 1].id || 1
+              : 1
+          }`
         );
       });
     this.scrollPositionHandler();
